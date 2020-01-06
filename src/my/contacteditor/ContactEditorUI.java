@@ -1,6 +1,8 @@
 
 package my.contacteditor;
 
+import javax.swing.JOptionPane;
+
 public class ContactEditorUI extends javax.swing.JFrame {
 
     public ContactEditorUI() {
@@ -38,8 +40,12 @@ public class ContactEditorUI extends javax.swing.JFrame {
         rbtCustom = new javax.swing.JRadioButton();
         btnOk = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
+        btnExit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Contact Editor");
+        setName("frmContactEditor"); // NOI18N
+        setResizable(false);
 
         pnlName.setBorder(javax.swing.BorderFactory.createTitledBorder("Name"));
 
@@ -53,7 +59,7 @@ public class ContactEditorUI extends javax.swing.JFrame {
 
         lblDisplayFormat.setText("Display Format");
 
-        cboDisplayFormat.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cboDisplayFormat.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "HTML", "Plain Text", "Custom" }));
 
         javax.swing.GroupLayout pnlNameLayout = new javax.swing.GroupLayout(pnlName);
         pnlName.setLayout(pnlNameLayout);
@@ -110,19 +116,18 @@ public class ContactEditorUI extends javax.swing.JFrame {
 
         lblEmailAdress.setText("E-mail Adress");
 
-        lstContactList.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane1.setViewportView(lstContactList);
 
+        btnAdd.setMnemonic('A');
         btnAdd.setText("Add");
 
+        btnEdit.setMnemonic('E');
         btnEdit.setText("Edit");
 
+        btnRemove.setMnemonic('R');
         btnRemove.setText("Remove");
 
+        btnAsDefault.setMnemonic('D');
         btnAsDefault.setText("As Default");
 
         lblMailFormat.setText("Mail Format");
@@ -197,9 +202,19 @@ public class ContactEditorUI extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        btnOk.setMnemonic('O');
         btnOk.setText("Ok");
 
-        btnCancel.setText("Cancelar");
+        btnCancel.setMnemonic('C');
+        btnCancel.setText("Cancel");
+
+        btnExit.setMnemonic('x');
+        btnExit.setText("Exit");
+        btnExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExitActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -214,11 +229,13 @@ public class ContactEditorUI extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnOk)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnCancel)))
+                        .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(88, 88, 88)
+                        .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
 
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnCancel, btnOk});
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnCancel, btnExit, btnOk});
 
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -230,12 +247,20 @@ public class ContactEditorUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancel)
-                    .addComponent(btnOk))
+                    .addComponent(btnOk)
+                    .addComponent(btnExit))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
+        String msg = "Do you want to leave?";
+        int opcao = JOptionPane.showConfirmDialog(null, msg, "Exit", JOptionPane.YES_NO_OPTION);
+        if (opcao == JOptionPane.YES_OPTION)
+            System.exit(0);
+    }//GEN-LAST:event_btnExitActionPerformed
 
     public static void main(String args[]) {
 
@@ -268,6 +293,7 @@ public class ContactEditorUI extends javax.swing.JFrame {
     private javax.swing.JButton btnAsDefault;
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnEdit;
+    private javax.swing.JButton btnExit;
     private javax.swing.JButton btnOk;
     private javax.swing.JButton btnRemove;
     private javax.swing.JComboBox<String> cboDisplayFormat;
